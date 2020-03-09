@@ -1,3 +1,5 @@
+Telegram bot for creating unique sticker for **Do NOT force** stickerpack. Upgrades stickerpack every minute.
+
 ## Develop
 Add `.env.dev` file with the following content:
 ```
