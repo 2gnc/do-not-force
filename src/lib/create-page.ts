@@ -5,11 +5,12 @@ import { Figures } from '../@types/common';
 import { buildPath } from './constants';
 
 export function generateHtmlPage(text: string, figure?: Figures): void {
-    const page = checkFileExist(buildPath);
+    const pagePath = path.resolve(__dirname, buildPath, 'index.html');
+    const page = checkFileExist(pagePath);
 
     if (page) {
         console.log('Deleting old file');
-        fs.unlinkSync(buildPath);
+        fs.unlinkSync(pagePath);
     }
 
     try {
@@ -22,7 +23,7 @@ export function generateHtmlPage(text: string, figure?: Figures): void {
                 </body>
             </html>
         `;
-        fs.writeFileSync(path.resolve(__dirname, '../..', buildPath), html);
+        fs.writeFileSync(path.resolve(__dirname, '../..', buildPath, 'index.html'), html);
     } catch (err) {
         console.error('Error while create HTML', err);
     }

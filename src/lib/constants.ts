@@ -1,1 +1,1 @@
-export const buildPath = './tmp/index.html';
+export const buildPath = './tmp';
