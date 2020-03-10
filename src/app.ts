@@ -1,13 +1,11 @@
+require('dotenv').config({ path: './.env.dev' }); // подключает переменные окружения для локальной разработки и тестов
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as dotenv from 'dotenv';
 
-dotenv.config({ path: './.env.dev' });
-
-import './bot';
+import './middlewares/bot';
 import './sticker-creator';
 
-const { PORT, NODE_ENV } = process.env;
+const { PORT } = process.env;
 
 const app = express()
     .use(express.json())
