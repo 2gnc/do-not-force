@@ -22,13 +22,16 @@ export async function generateHtmlPage(text: string, figure?: Figures): Promise<
                 <link rel="stylesheet" href=${font.url}>
                     <style>
                         body {
-                            font-family: ${font.name};
+                            font-family: "${font.name}";
                             font-size: 48px;
+                        }
+                        .text {
+                            margin-left: 30px;
                         }
                     </style>
                 </head>
                 <body>
-                    <div>${text}</div>
+                    <div class="text">${text}</div>
                 </body>
             </html>
         `;

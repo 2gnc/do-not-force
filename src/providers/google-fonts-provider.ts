@@ -16,13 +16,13 @@ export async function getRandomFont(): Promise<{ name: string; url: string }> {
         const pickedFontNumber = chance.integer({ min: 0, max: fontsCyrillic.length });
         return {
             name: fontsCyrillic[pickedFontNumber].family,
-            url: `${fontURLBase}${fontsCyrillic[pickedFontNumber].family}`,
+            url: encodeURI(`${fontURLBase}${fontsCyrillic[pickedFontNumber].family}`),
         };
     } catch (err) {
         console.log('Error in random font', err);
         return {
             name: 'Roboto',
-            url: `${fontURLBase}Roboto`,
+            url: encodeURI(`${fontURLBase}Roboto`),
         };
     }
 }

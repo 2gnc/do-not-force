@@ -1,4 +1,4 @@
-import { generateHtmlPage } from './providers/create-page-provider';
+import { generateHtmlPage } from './providers/html-page-provider';
 import { createScreenshot } from './providers/screenshot-provider';
 
 (async (): Promise<void> => {
