@@ -52,13 +52,13 @@ export async function generateHtmlPage(text: string): Promise<void> {
                         }
                         .text {
                             display: flex;
-                            justify-content: center;
                             align-items: center;
-                            color: ${figureSettings.textColor};     
+                            color: ${figureSettings.textColor};  
+                            text-align: center;
                             font-weight: bolder;
-                            text-shadow: ${figureSettings.textContrastColor} 0 -3px 1px, ${
+                            text-shadow: ${figureSettings.textContrastColor} 0 -2px 1px, ${
             figureSettings.textContrastColor
-        } 0 3px 1px, ${figureSettings.textContrastColor} 3px 0 1px, ${figureSettings.textContrastColor} -3px 0 1px;
+        } 0 2px 1px, ${figureSettings.textContrastColor} 2px 0 1px, ${figureSettings.textContrastColor} -2px 0 1px;
                         }
                     </style>
                 </head>
