@@ -20,3 +20,8 @@ export interface SceneParams {
 }
 
 export type FigureCoorginates = string[];
+
+export interface Sticker {
+    text: string;
+    emoji: string;
+}
