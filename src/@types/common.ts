@@ -2,7 +2,7 @@ export enum Figures {
     TRIANGLE,
     // CIRCLE,
     // ELLIPSE,
-    // RECTANGLE,
+    RECTANGLE,
 }
 
 export interface FigureParams {
@@ -16,6 +16,7 @@ export interface SceneParams {
     background: FigureParams;
     foreground: FigureParams;
     textColor: string;
+    textContrastColor: string;
 }
 
 export type FigureCoorginates = string[];

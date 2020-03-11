@@ -7,10 +7,11 @@ import { generateFigure } from '../lib/generate-figure';
 import { FigureParams, Figures } from '../@types/common';
 
 function mapFigureToClipPath(figure: FigureParams): string {
-    console.log(figure);
+    console.log('FIGURE', figure);
     switch (figure.figure) {
         case Figures.TRIANGLE:
-            return `polygon(${figure.coordinates.join(', ')})`;
+        case Figures.RECTANGLE:
+            return `polygon(${figure.coordinates.reverse().join(', ')})`;
         default:
             return '';
     }
@@ -54,18 +55,23 @@ export async function generateHtmlPage(text: string): Promise<void> {
                         .background-figure {
                             background: ${figureSettings.background.color};
                             clip-path: ${mapFigureToClipPath(figureSettings.background)};
-                            transform: rotate(${figureSettings.background.rotation}deg)
+                            transform: rotate(${figureSettings.background.rotation}deg);
+                            transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.8);
                         }
                         .foreground-figure {
                             background: ${figureSettings.foreground.color};
                             clip-path: ${mapFigureToClipPath(figureSettings.foreground)};
-                            transform: rotate(${figureSettings.foreground.rotation}deg)
+                            transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.6);
                         }
                         .text {
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             color: ${figureSettings.textColor};
+                            font-weight: bolder;
+                            text-shadow: ${figureSettings.textContrastColor} 0 -2px 1px, ${
+            figureSettings.textContrastColor
+        } 0 2px 1px, ${figureSettings.textContrastColor} 2px 0 1px, ${figureSettings.textContrastColor} -2px 0 1px;
                         }
                     </style>
                 </head>
