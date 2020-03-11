@@ -1,6 +1,21 @@
 export enum Figures {
-    TRIANGLE = 'triangle',
-    CIRCLE = 'circle',
-    OVAL = 'oval',
-    RECTANGLE = 'rectangle',
+    TRIANGLE,
+    // CIRCLE,
+    // ELLIPSE,
+    // RECTANGLE,
 }
+
+export interface FigureParams {
+    color: string;
+    figure: Figures;
+    coordinates: FigureCoorginates;
+    rotation: number;
+}
+
+export interface SceneParams {
+    background: FigureParams;
+    foreground: FigureParams;
+    textColor: string;
+}
+
+export type FigureCoorginates = string[];

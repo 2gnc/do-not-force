@@ -1,11 +1,22 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import checkFileExist from '../helpers/check-file-exists';
-import { Figures } from '../@types/common';
 import { buildPath } from '../lib/constants';
 import { getRandomFont } from './google-fonts-provider';
+import { generateFigure } from '../lib/generate-figure';
+import { FigureParams, Figures } from '../@types/common';
 
-export async function generateHtmlPage(text: string, figure?: Figures): Promise<void> {
+function mapFigureToClipPath(figure: FigureParams): string {
+    console.log(figure);
+    switch (figure.figure) {
+        case Figures.TRIANGLE:
+            return `polygon(${figure.coordinates.join(', ')})`;
+        default:
+            return '';
+    }
+}
+
+export async function generateHtmlPage(text: string): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
     const page = checkFileExist(pagePath);
 
@@ -13,6 +24,8 @@ export async function generateHtmlPage(text: string, figure?: Figures): Promise<
         console.log('Deleting old file');
         fs.unlinkSync(pagePath);
     }
+
+    const figureSettings = await generateFigure();
 
     try {
         const font = await getRandomFont();
@@ -23,15 +36,45 @@ export async function generateHtmlPage(text: string, figure?: Figures): Promise<
                     <style>
                         body {
                             font-family: "${font.name}";
-                            font-size: 48px;
+                            font-size: 60px;
+                            text-transform: uppercase;
+                        }
+                        .box {
+                            width: 512px;
+                            height: 512px;
+                            position: relative;
+                        }
+                        .background-figure,
+                        .foreground-figure,
+                        .text {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                        }
+                        .background-figure {
+                            background: ${figureSettings.background.color};
+                            clip-path: ${mapFigureToClipPath(figureSettings.background)};
+                            transform: rotate(${figureSettings.background.rotation}deg)
+                        }
+                        .foreground-figure {
+                            background: ${figureSettings.foreground.color};
+                            clip-path: ${mapFigureToClipPath(figureSettings.foreground)};
+                            transform: rotate(${figureSettings.foreground.rotation}deg)
                         }
                         .text {
-                            margin-left: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: ${figureSettings.textColor};
                         }
                     </style>
                 </head>
                 <body>
-                    <div class="text">${text}</div>
+                    <div class="box">
+                        <div class="background-figure"></div>
+                        <div class="foreground-figure"></div>
+                        <div class="text">${text}</div>
+                    </div>
                 </body>
             </html>
         `;

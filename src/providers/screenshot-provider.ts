@@ -10,7 +10,6 @@ export async function createScreenshot(outputName: string): Promise<void> {
         await page.screenshot({
             path: path.join(assetsPath, 'screenshots', outputName),
             omitBackground: true,
-            // quality: 100,
             clip: {
                 x: 0,
                 y: 0,
