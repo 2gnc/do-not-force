@@ -12,6 +12,8 @@ function mapFigureToClipPath(figure: FigureParams): string {
         case Figures.TRIANGLE:
         case Figures.RECTANGLE:
             return `polygon(${figure.coordinates.reverse().join(', ')})`;
+        case Figures.CIRCLE:
+            return `circle(${figure.coordinates[0]} at 50% 50%)`;
         default:
             return '';
     }

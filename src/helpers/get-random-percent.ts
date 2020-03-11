@@ -1,6 +1,6 @@
 import * as Chance from 'chance';
 
-export default function(): number {
+export default function(min?: number, max?: number): number {
     const chance = new Chance();
-    return chance.integer({ min: 0, max: 100 });
+    return chance.integer({ min: min || 0, max: max || 100 });
 }
