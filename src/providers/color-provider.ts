@@ -2,11 +2,17 @@ import * as Chance from 'chance';
 import { doRequest } from '../lib/do-request';
 
 export async function getColorPalette(color?: string): Promise<Record<string, string>> {
-    const isColorCorrect = /^[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}$/.test(color ? color.replace(' ', '') : '');
+    const isColorCorrect = /^#[a-z0-9]{6}$/.test(color);
+    console.log('isColorCorrect', isColorCorrect);
+
     if (!isColorCorrect) {
         color = new Chance().color({ format: 'rgb' });
     }
-    const COLOR_API_URL = `https://www.thecolorapi.com/scheme?rgb=${color}&mode=triad&count=3&format=json`;
+    const COLOR_API_URL = `https://www.thecolorapi.com/scheme?hex=${color.replace(
+        '#',
+        '',
+    )}&mode=triad&count=3&format=json`;
+    console.log(COLOR_API_URL);
     const raw = await doRequest(COLOR_API_URL, {
         origin: 'do-not-force-bot',
         gotOptions: {},

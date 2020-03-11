@@ -59,8 +59,6 @@ export async function generateHtmlPage(text: string): Promise<void> {
                         .background-figure {
                             background: ${figureSettings.background.color};
                             clip-path: ${mapFigureToClipPath(figureSettings.background)};
-                            transform: rotate(${figureSettings.background.rotation}deg);
-                            transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.8);
                         }
                         .foreground-figure {
                             background: ${figureSettings.foreground.color};

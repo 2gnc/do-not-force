@@ -2,6 +2,7 @@ import * as Chance from 'chance';
 import { Figures, SceneParams, FigureCoorginates } from '../@types/common';
 import { getColorPalette } from '../providers/color-provider';
 import rPercent from '../helpers/get-random-percent';
+import { materialColorsList } from '../lib/constants';
 
 function getFigureCoordinates(figure: number): FigureCoorginates {
     const coordinates: FigureCoorginates = [];
@@ -32,7 +33,9 @@ function getFigureCoordinates(figure: number): FigureCoorginates {
 export async function generateFigure(): Promise<SceneParams> {
     const chance = new Chance();
 
-    const colors = await getColorPalette(chance.color({ format: 'rgb' }));
+    const colors = await getColorPalette(
+        materialColorsList[chance.integer({ min: 0, max: materialColorsList.length })],
+    );
 
     const bgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
     const fgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
