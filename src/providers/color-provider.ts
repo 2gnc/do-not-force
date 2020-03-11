@@ -12,7 +12,6 @@ export async function getColorPalette(color?: string): Promise<Record<string, st
         '#',
         '',
     )}&mode=triad&count=3&format=json`;
-    console.log(COLOR_API_URL);
     const raw = await doRequest(COLOR_API_URL, {
         origin: 'do-not-force-bot',
         gotOptions: {},
@@ -22,6 +21,5 @@ export async function getColorPalette(color?: string): Promise<Record<string, st
         background: parsed.colors[0].rgb.value,
         foreground: parsed.colors[2].rgb.value,
         textColor: parsed.colors[0].contrast.value,
-        textContrastColor: parsed.colors[1].rgb.value,
     };
 }

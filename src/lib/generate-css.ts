@@ -1,9 +1,10 @@
 import mapFigureToPath from '../helpers/map-figure-to-path';
+import * as Color from 'color';
 import { generateFigure } from './generate-figure';
 
 export async function generateCss(fontName: string): Promise<string> {
     const figureSettings = await generateFigure();
-
+    const stroke = new Color(figureSettings.textColor).negate();
     return `<style>
     body {
         font-family: "${fontName}";
@@ -25,6 +26,7 @@ export async function generateCss(fontName: string): Promise<string> {
     .background-figure {
         background: ${figureSettings.background.color};
         clip-path: ${mapFigureToPath(figureSettings.background)};
+        transform: rotate(${figureSettings.background.rotation}deg);
     }
     .foreground-figure {
         background: ${figureSettings.foreground.color};
@@ -36,9 +38,8 @@ export async function generateCss(fontName: string): Promise<string> {
         align-items: center;
         color: ${figureSettings.textColor};  
         text-align: center;
-        text-shadow: ${figureSettings.textContrastColor} 0 -2px 1px, ${figureSettings.textContrastColor} 0 2px 1px, ${
-        figureSettings.textContrastColor
-    } 2px 0 1px, ${figureSettings.textContrastColor} -2px 0 1px;
+        font-weight: bold;
+        text-shadow: ${stroke} 0 -1px 1px, ${stroke} 0 1px 1px, ${stroke} 1px 0 1px, ${stroke} -1px 0 1px;
     }
 </style>`;
 }

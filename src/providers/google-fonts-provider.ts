@@ -11,7 +11,7 @@ export async function getRandomFont(): Promise<{ name: string; url: string }> {
             gotOptions: {},
         });
         const fontsCyrillic = JSON.parse(fonts.body).items.filter((font: Record<string, any>) => {
-            return font.subsets.includes('cyrillic');
+            return font.subsets.includes('cyrillic') && font.category !== 'serif';
         });
         const pickedFontNumber = chance.integer({ min: 0, max: fontsCyrillic.length });
         return {

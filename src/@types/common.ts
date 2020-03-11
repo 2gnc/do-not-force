@@ -16,7 +16,6 @@ export interface SceneParams {
     background: FigureParams;
     foreground: FigureParams;
     textColor: string;
-    textContrastColor: string;
 }
 
 export type FigureCoorginates = string[];

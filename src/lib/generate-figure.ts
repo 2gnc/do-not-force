@@ -56,6 +56,5 @@ export async function generateFigure(): Promise<SceneParams> {
             rotation: fgRotation,
         },
         textColor: colors.textColor,
-        textContrastColor: colors.textContrastColor,
     };
 }
