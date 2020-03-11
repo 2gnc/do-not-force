@@ -1,25 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import checkFileExist from '../helpers/check-file-exists';
-import { buildPath } from '../lib/constants';
-import { getRandomFont } from './google-fonts-provider';
-import { generateFigure } from '../lib/generate-figure';
-import { FigureParams, Figures } from '../@types/common';
-
-function mapFigureToClipPath(figure: FigureParams): string {
-    console.log('FIGURE', figure);
-    switch (figure.figure) {
-        case Figures.TRIANGLE:
-        case Figures.RECTANGLE:
-            return `polygon(${figure.coordinates.reverse().join(', ')})`;
-        case Figures.CIRCLE:
-            return `circle(${figure.coordinates[0]} at 50% 50%)`;
-        case Figures.ELLIPSE:
-            return `ellipse(${figure.coordinates[0]} at 50% 50%)`;
-        default:
-            return '';
-    }
-}
+import mapFigureToPath from '../helpers/map-figure-to-path';
+import { buildPath } from './constants';
+import { getRandomFont } from '../providers/google-fonts-provider';
+import { generateFigure } from './generate-figure';
 
 export async function generateHtmlPage(text: string): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
@@ -58,18 +43,18 @@ export async function generateHtmlPage(text: string): Promise<void> {
                         }
                         .background-figure {
                             background: ${figureSettings.background.color};
-                            clip-path: ${mapFigureToClipPath(figureSettings.background)};
+                            clip-path: ${mapFigureToPath(figureSettings.background)};
                         }
                         .foreground-figure {
                             background: ${figureSettings.foreground.color};
-                            clip-path: ${mapFigureToClipPath(figureSettings.foreground)};
+                            clip-path: ${mapFigureToPath(figureSettings.foreground)};
                             transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.8);
                         }
                         .text {
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            color: ${figureSettings.textColor};
+                            color: ${figureSettings.textColor};     
                             font-weight: bolder;
                             text-shadow: ${figureSettings.textContrastColor} 0 -3px 1px, ${
             figureSettings.textContrastColor
