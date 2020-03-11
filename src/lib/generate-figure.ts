@@ -7,12 +7,11 @@ function getFigureCoordinates(figure: number): FigureCoorginates {
     const coordinates: FigureCoorginates = [];
     switch (figure) {
         case Figures.CIRCLE:
-            coordinates.push(`${rPercent(40, 50)}%`);
+            coordinates.push(`${rPercent(30, 50)}%`);
             break;
-        // case Figures.ELLIPSE:
-        //     coordinates.push(chance.integer({ min: 450, max: 512 })); // width
-        //     coordinates.push(chance.integer({ min: 100, max: 400 })); // height
-        //     break;
+        case Figures.ELLIPSE:
+            coordinates.push(`${rPercent(15, 45)}% ${rPercent(35, 50)}%`);
+            break;
         case Figures.RECTANGLE:
             coordinates.push(`${rPercent()}% 0%`);
             coordinates.push(`100% ${rPercent()}%`);
@@ -35,8 +34,8 @@ export async function generateFigure(): Promise<SceneParams> {
 
     const colors = await getColorPalette(chance.color({ format: 'rgb' }));
 
-    const bgFigure = chance.integer({ min: 0, max: 2 /*Object.keys(Figures).length / 2 */ });
-    const fgFigure = chance.integer({ min: 0, max: 2 /*Object.keys(Figures).length / 2 */ });
+    const bgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
+    const fgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
     const bgRotation = chance.integer({ min: 0, max: 350 });
     const fgRotation = chance.integer({ min: 0, max: 350 });
 

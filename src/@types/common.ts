@@ -1,7 +1,7 @@
 export enum Figures {
     TRIANGLE,
     CIRCLE,
-    // ELLIPSE,
+    ELLIPSE,
     RECTANGLE,
 }
 
