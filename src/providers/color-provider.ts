@@ -20,8 +20,8 @@ export async function getColorPalette(color?: string): Promise<Record<string, st
     const parsed = JSON.parse(raw.body);
     return {
         background: parsed.colors[0].rgb.value,
-        foreground: parsed.colors[1].rgb.value,
+        foreground: parsed.colors[2].rgb.value,
         textColor: parsed.colors[0].contrast.value,
-        textContrastColor: parsed.colors[2].rgb.value,
+        textContrastColor: parsed.colors[1].rgb.value,
     };
 }

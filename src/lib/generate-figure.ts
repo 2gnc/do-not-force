@@ -37,8 +37,8 @@ export async function generateFigure(): Promise<SceneParams> {
         materialColorsList[chance.integer({ min: 0, max: materialColorsList.length })],
     );
 
-    const bgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
-    const fgFigure = chance.integer({ min: 0, max: Object.keys(Figures).length / 2 });
+    const bgFigure = chance.integer({ min: 0, max: 3 });
+    const fgFigure = chance.integer({ min: 0, max: 3 });
     const bgRotation = chance.integer({ min: 0, max: 350 });
     const fgRotation = chance.integer({ min: 0, max: 350 });
 

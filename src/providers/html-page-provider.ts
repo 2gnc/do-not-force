@@ -63,7 +63,7 @@ export async function generateHtmlPage(text: string): Promise<void> {
                         .foreground-figure {
                             background: ${figureSettings.foreground.color};
                             clip-path: ${mapFigureToClipPath(figureSettings.foreground)};
-                            transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.6);
+                            transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.8);
                         }
                         .text {
                             display: flex;
@@ -71,9 +71,9 @@ export async function generateHtmlPage(text: string): Promise<void> {
                             align-items: center;
                             color: ${figureSettings.textColor};
                             font-weight: bolder;
-                            text-shadow: ${figureSettings.textContrastColor} 0 -2px 1px, ${
+                            text-shadow: ${figureSettings.textContrastColor} 0 -3px 1px, ${
             figureSettings.textContrastColor
-        } 0 2px 1px, ${figureSettings.textContrastColor} 2px 0 1px, ${figureSettings.textContrastColor} -2px 0 1px;
+        } 0 3px 1px, ${figureSettings.textContrastColor} 3px 0 1px, ${figureSettings.textContrastColor} -3px 0 1px;
                         }
                     </style>
                 </head>
