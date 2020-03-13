@@ -27,8 +27,8 @@ export async function botUploadStickers(): Promise<string[]> {
     for (const sticker of stickers) {
         const figure = await generateFigure();
         const font = fonts.randomFont;
-        await generateHtmlPage(sticker.text, `${i}.html`);
-        await createScreenshot(`${i}.png`, `${i}.html`);
+        await generateHtmlPage(sticker.text, `${i}.html`, figure);
+        await createScreenshot(`${i}.html`, `${i}.png`);
         i++;
     }
     return [''];

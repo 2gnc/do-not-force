@@ -1,10 +1,9 @@
 import mapFigureToPath from '../helpers/map-figure-to-path';
 import * as Color from 'color';
-import { generateFigure } from './generate-figure';
+import { SceneParams } from '../@types/common';
 
-export async function generateCss(fontName: string): Promise<string> {
-    const figureSettings = await generateFigure();
-    const stroke = new Color(figureSettings.textColor).negate();
+export async function generateCss(fontName: string, figure: SceneParams): Promise<string> {
+    const stroke = new Color(figure.textColor).negate();
     return `<style>
     body {
         font-family: "${fontName}";
@@ -24,19 +23,19 @@ export async function generateCss(fontName: string): Promise<string> {
         position: absolute;
     }
     .background-figure {
-        background: ${figureSettings.background.color};
-        clip-path: ${mapFigureToPath(figureSettings.background)};
-        transform: rotate(${figureSettings.background.rotation}deg);
+        background: ${figure.background.color};
+        clip-path: ${mapFigureToPath(figure.background)};
+        transform: rotate(${figure.background.rotation}deg);
     }
     .foreground-figure {
-        background: ${figureSettings.foreground.color};
-        clip-path: ${mapFigureToPath(figureSettings.foreground)};
-        transform: rotate(${figureSettings.foreground.rotation}deg) scale(0.8);
+        background: ${figure.foreground.color};
+        clip-path: ${mapFigureToPath(figure.foreground)};
+        transform: rotate(${figure.foreground.rotation}deg) scale(0.8);
     }
     .text {
         display: flex;
         align-items: center;
-        color: ${figureSettings.textColor};  
+        color: ${figure.textColor};  
         text-align: center;
         font-weight: bold;
         text-shadow: ${stroke} 0 -1px 1px, ${stroke} 0 1px 1px, ${stroke} 1px 0 1px, ${stroke} -1px 0 1px;

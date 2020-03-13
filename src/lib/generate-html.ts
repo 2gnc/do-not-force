@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { Figures, SceneParams, FigureCoorginates } from '../@types/common';
 import checkFileExist from '../helpers/check-file-exists';
 import { buildPath } from './constants';
 import { generateCss } from './generate-css';
 import { Fonts } from '../providers/google-fonts-provider';
 
-export async function generateHtmlPage(text: string, filename?: string): Promise<void> {
+export async function generateHtmlPage(text: string, filename?: string, figure?: SceneParams): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
     const page = checkFileExist(pagePath);
     const fonts = new Fonts();
@@ -22,7 +23,7 @@ export async function generateHtmlPage(text: string, filename?: string): Promise
             <html>
                 <head>
                 <link rel="stylesheet" href=${url}>
-                    ${await generateCss(name)}
+                    ${await generateCss(name, figure)}
                 </head>
                 <body>
                     <div class="box">

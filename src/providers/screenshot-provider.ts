@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as ppt from 'puppeteer';
 
-export async function createScreenshot(outputName: string, inputName?: string): Promise<void> {
+export async function createScreenshot(inputName: string, outputName: string): Promise<void> {
     try {
         const assetsPath = path.join(__dirname, '../..', 'tmp');
         const browser = await ppt.launch();
