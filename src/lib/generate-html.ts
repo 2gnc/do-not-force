@@ -1,23 +1,26 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { Figures, SceneParams, FigureCoorginates } from '../@types/common';
+import { SceneParams } from '../@types/common';
 import checkFileExist from '../helpers/check-file-exists';
 import { buildPath } from './constants';
 import { generateCss } from './generate-css';
-import { Fonts } from '../providers/google-fonts-provider';
+import { FontPrepared } from '../providers/google-fonts-provider';
 
-export async function generateHtmlPage(text: string, filename?: string, figure?: SceneParams): Promise<void> {
+export async function generateHtmlPage(
+    text: string,
+    filename: string,
+    figure: SceneParams,
+    font: FontPrepared,
+): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
     const page = checkFileExist(pagePath);
-    const fonts = new Fonts();
-    await fonts.initialize();
 
     if (page) {
         console.log('Deleting old file');
         fs.unlinkSync(pagePath);
     }
 
-    const { name, url } = fonts.randomFont;
+    const { name, url } = font;
     try {
         const html = `
             <html>

@@ -12,7 +12,7 @@ interface FontRaw {
     files: Record<string, string>;
 }
 
-interface FontPrepared {
+export interface FontPrepared {
     name: string;
     url: string;
 }
