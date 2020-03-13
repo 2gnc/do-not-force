@@ -1,6 +1,6 @@
 import { Sticker } from '../@types/common';
 
-const stickers: Sticker[] = [
+export const stickers: Sticker[] = [
     {
         text: 'Не надо форсировать',
         emojis: '☝🏻',
@@ -37,5 +37,12 @@ const stickers: Sticker[] = [
         text: 'Я не форсирую, я на таблицах еду',
         emojis: '😇',
     },
+    {
+        text: 'Похуй, форсируем',
+        emojis: '😈',
+    },
+    {
+        text: 'Похуй, на таблицах едем',
+        emojis: '😂',
+    },
 ];
-export default stickers;

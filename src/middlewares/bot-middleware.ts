@@ -2,6 +2,7 @@ import Telegraf from 'telegraf';
 import * as fs from 'fs';
 import * as path from 'path';
 import { setName, fullSetName } from '../lib/constants';
+import { botUploadStickers } from '../providers/bot-upload-stickers';
 
 // import * as path from 'path';с
 
@@ -32,6 +33,9 @@ export default async function(): Promise<void> {
             // console.log(1111, stickerSet);
             // const sticker = stickerSet.stickers[0];
             // return ctx.replyWithSticker('CAACAgIAAxUAAV5rd-bWFmsgus-Q74hgxUFHczAkAAIDAAMpIekF8UeOPJU9vt4YBA');
+        });
+        bot.on('message', async (ctx) => {
+            await botUploadStickers();
         });
         await bot.launch();
         // const pic = fs.readFileSync(path.join(__dirname, '../../tmp/screenshots/pic.png'));

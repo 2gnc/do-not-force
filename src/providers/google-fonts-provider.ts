@@ -16,12 +16,12 @@ interface FontPrepared {
     name: string;
     url: string;
 }
-export default class Fonts {
+export class Fonts {
     private _fontURLBase = 'https://fonts.googleapis.com/css?family=';
     private _googleApiURL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.GOOGLE_API_KEY}`;
     _fonts: FontPrepared[] = [];
 
-    initialize = async (): Promise<void> => {
+    public initialize = async (): Promise<void> => {
         try {
             const fonts = await doRequest(this._googleApiURL, {
                 origin: 'do-not-force-bot',
