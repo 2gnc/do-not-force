@@ -3,7 +3,6 @@ import { doRequest } from '../lib/do-request';
 
 export async function getColorPalette(color?: string): Promise<Record<string, string>> {
     const isColorCorrect = /^#[a-z0-9]{6}$/.test(color);
-    console.log('isColorCorrect', isColorCorrect);
 
     if (!isColorCorrect) {
         color = new Chance().color({ format: 'rgb' });

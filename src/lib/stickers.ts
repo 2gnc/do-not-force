@@ -3,35 +3,35 @@ import { Sticker } from '../@types/common';
 const stickers: Sticker[] = [
     {
         text: 'Не надо форсировать',
-        emoji: '😑',
+        emojis: '☝🏻',
     },
     {
         text: 'Давайте не будем форсировать',
-        emoji: '',
+        emojis: '😑',
     },
     {
         text: 'Форсируем?',
-        emoji: '',
+        emojis: '❓',
     },
     {
         text: 'Я не форсирую',
-        emoji: '',
+        emojis: '🙅🏻‍♀',
     },
     {
         text: 'Уже можно доезжать?',
-        emoji: '',
+        emojis: '🚗',
     },
     {
         text: 'На таблицах спокойно доедем',
-        emoji: '',
+        emojis: '🚙',
     },
     {
         text: 'Спокойно едем, не форсируем',
-        emoji: '',
+        emojis: '🚌',
     },
     {
         text: 'Как там таблицы?',
-        emoji: '',
+        emojis: '🗓',
     },
 ];
 export default stickers;

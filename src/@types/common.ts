@@ -1,3 +1,4 @@
+// TODO реализовать HEART
 export enum Figures {
     TRIANGLE,
     CIRCLE,
@@ -22,5 +23,5 @@ export type FigureCoorginates = string[];
 
 export interface Sticker {
     text: string;
-    emoji: string;
+    emojis: string;
 }

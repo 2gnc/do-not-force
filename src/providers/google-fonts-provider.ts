@@ -1,6 +1,16 @@
 import * as Chance from 'chance';
 import { doRequest } from '../lib/do-request';
 
+interface FontsClass {
+    fontsBase: string[];
+}
+export default class Fonts {
+    fontsBase: string[];
+    public constructor() {
+        this.fontsBase = [];
+    }
+}
+
 export async function getRandomFont(): Promise<{ name: string; url: string }> {
     const fontURLBase = 'https://fonts.googleapis.com/css?family=';
     const googleApiURL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.GOOGLE_API_KEY}`;
@@ -26,3 +36,5 @@ export async function getRandomFont(): Promise<{ name: string; url: string }> {
         };
     }
 }
+// TODO сделать запрос за шрифтами раз в сутки а не при каждом запросе, добавить ретраи
+// понять почему скриншот раньше текста делается
