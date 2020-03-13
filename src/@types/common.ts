@@ -25,3 +25,19 @@ export interface Sticker {
     text: string;
     emojis: string;
 }
+
+export interface FontPrepared {
+    name: string;
+    url: string;
+}
+
+export interface FontRaw {
+    kind: string;
+    family: string;
+    category: string;
+    variants: string[];
+    subsets: string[];
+    version: string;
+    lastModified: string;
+    files: Record<string, string>;
+}

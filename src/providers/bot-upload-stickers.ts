@@ -29,7 +29,14 @@ export async function botUploadStickers(): Promise<string[]> {
         const font = fonts.randomFont;
         await generateHtmlPage(sticker.text, `${i}.html`, figure, font);
         await createScreenshot(`${i}.html`, `${i}.png`);
+        const newSticker = {};
         i++;
+
+        // {
+        //     png_sticker: await getStickerId(),
+        //     emojis: '💩',
+        //     mask_position: undefined,
+        //   },
     }
     return [''];
 }

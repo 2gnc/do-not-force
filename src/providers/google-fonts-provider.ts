@@ -1,21 +1,7 @@
 import * as Chance from 'chance';
+import { FontPrepared, FontRaw } from '../@types/common';
 import { doRequest } from '../lib/do-request';
 
-interface FontRaw {
-    kind: string;
-    family: string;
-    category: string;
-    variants: string[];
-    subsets: string[];
-    version: string;
-    lastModified: string;
-    files: Record<string, string>;
-}
-
-export interface FontPrepared {
-    name: string;
-    url: string;
-}
 export class Fonts {
     private _fontURLBase = 'https://fonts.googleapis.com/css?family=';
     private _googleApiURL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.GOOGLE_API_KEY}`;

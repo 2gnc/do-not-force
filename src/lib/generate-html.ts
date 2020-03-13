@@ -1,10 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { SceneParams } from '../@types/common';
+import { SceneParams, FontPrepared } from '../@types/common';
 import checkFileExist from '../helpers/check-file-exists';
 import { buildPath } from './constants';
 import { generateCss } from './generate-css';
-import { FontPrepared } from '../providers/google-fonts-provider';
 
 export async function generateHtmlPage(
     text: string,
