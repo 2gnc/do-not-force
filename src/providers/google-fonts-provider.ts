@@ -1,40 +1,51 @@
 import * as Chance from 'chance';
 import { doRequest } from '../lib/do-request';
 
-interface FontsClass {
-    fontsBase: string[];
-}
-export default class Fonts {
-    fontsBase: string[];
-    public constructor() {
-        this.fontsBase = [];
-    }
+interface FontRaw {
+    kind: string;
+    family: string;
+    category: string;
+    variants: string[];
+    subsets: string[];
+    version: string;
+    lastModified: string;
+    files: Record<string, string>;
 }
 
-export async function getRandomFont(): Promise<{ name: string; url: string }> {
-    const fontURLBase = 'https://fonts.googleapis.com/css?family=';
-    const googleApiURL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.GOOGLE_API_KEY}`;
-    const chance = new Chance();
-    try {
-        const fonts = await doRequest(googleApiURL, {
-            origin: 'do-not-force-bot',
-            gotOptions: {},
-        });
-        const fontsCyrillic = JSON.parse(fonts.body).items.filter((font: Record<string, any>) => {
-            return font.subsets.includes('cyrillic') && font.category !== 'serif';
-        });
-        const pickedFontNumber = chance.integer({ min: 0, max: fontsCyrillic.length });
-        return {
-            name: fontsCyrillic[pickedFontNumber].family,
-            url: encodeURI(`${fontURLBase}${fontsCyrillic[pickedFontNumber].family}`),
-        };
-    } catch (err) {
-        console.log('Error in random font', err);
-        return {
-            name: 'Roboto',
-            url: encodeURI(`${fontURLBase}Roboto`),
-        };
+interface FontPrepared {
+    name: string;
+    url: string;
+}
+export default class Fonts {
+    private _fontURLBase = 'https://fonts.googleapis.com/css?family=';
+    private _googleApiURL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.GOOGLE_API_KEY}`;
+    _fonts: FontPrepared[] = [];
+
+    initialize = async (): Promise<void> => {
+        try {
+            const fonts = await doRequest(this._googleApiURL, {
+                origin: 'do-not-force-bot',
+                gotOptions: {},
+            });
+            const fontsCyr: FontRaw[] = JSON.parse(fonts.body).items.filter((font: Record<string, any>) => {
+                return font.subsets.includes('cyrillic') && font.category !== 'serif';
+            });
+            fontsCyr.forEach((font: FontRaw) => {
+                this._fonts.push({
+                    name: font.family,
+                    url: encodeURI(`${this._fontURLBase}${font.family}`),
+                });
+            }, this);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    get fonts(): FontPrepared[] {
+        return this._fonts;
+    }
+    get randomFont(): FontPrepared {
+        const chance = new Chance();
+        const rNum = chance.integer({ min: 0, max: this._fonts.length });
+        return this._fonts[rNum];
     }
 }
-// TODO сделать запрос за шрифтами раз в сутки а не при каждом запросе, добавить ретраи
-// понять почему скриншот раньше текста делается

@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { setName, fullSetName } from '../lib/constants';
 
-// import * as path from 'path';
+// import * as path from 'path';с
 
 export default async function(): Promise<void> {
     const bot = new Telegraf(process.env.BOT_API_KEY);

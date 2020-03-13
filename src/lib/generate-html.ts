@@ -3,23 +3,26 @@ import * as path from 'path';
 import checkFileExist from '../helpers/check-file-exists';
 import { buildPath } from './constants';
 import { generateCss } from './generate-css';
-import { getRandomFont } from '../providers/google-fonts-provider';
+import Fonts from '../providers/google-fonts-provider';
 
 export async function generateHtmlPage(text: string): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
     const page = checkFileExist(pagePath);
-    const font = await getRandomFont();
+    const fonts = new Fonts();
+    await fonts.initialize();
 
     if (page) {
         console.log('Deleting old file');
         fs.unlinkSync(pagePath);
     }
+
+    const { name, url } = fonts.randomFont;
     try {
         const html = `
             <html>
                 <head>
-                <link rel="stylesheet" href=${font.url}>
-                    ${await generateCss(font.name)}
+                <link rel="stylesheet" href=${url}>
+                    ${await generateCss(name)}
                 </head>
                 <body>
                     <div class="box">

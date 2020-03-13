@@ -33,5 +33,9 @@ const stickers: Sticker[] = [
         text: 'Как там таблицы?',
         emojis: '🗓',
     },
+    {
+        text: 'Я не форсирую, я на таблицах еду',
+        emojis: '😇',
+    },
 ];
 export default stickers;
