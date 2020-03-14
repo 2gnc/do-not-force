@@ -1,9 +1,6 @@
 export const buildPath = './tmp';
-
 export const setName = 'DoNotForceDynamic';
-
 export const fullSetName = 'DoNotForceDynamic_by_do_not_force_bot';
-
 export const materialColorsList = [
     '#ffebee',
     '#ffcdd2',
@@ -260,3 +257,5 @@ export const materialColorsList = [
     '#37474f',
     '#263238',
 ];
+export const colorsStopList: string[] = [];
+export const fontsStopList: string[] = [];

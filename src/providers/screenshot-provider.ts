@@ -9,6 +9,7 @@ export async function createScreenshot(inputName: string, outputName: string): P
         await page.goto(`file://${assetsPath}/${inputName ? inputName : 'index.html'}`, {
             waitUntil: 'domcontentloaded',
         });
+        await page.waitFor(500);
         await page.screenshot({
             path: path.join(assetsPath, 'screenshots', outputName),
             omitBackground: true,
