@@ -17,6 +17,9 @@ export class Fonts {
                 return font.subsets.includes('cyrillic') && font.category !== 'serif';
             });
             fontsCyr.forEach((font: FontRaw) => {
+                if (!font.family) {
+                    return;
+                }
                 this._fonts.push({
                     name: font.family,
                     url: encodeURI(`${this._fontURLBase}${font.family}`),
