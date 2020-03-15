@@ -12,7 +12,8 @@ export default async function(): Promise<void> {
             const { stickers } = await bot.telegram.getStickerSet(fullSetName);
             await botClearStickers(stickers);
             await botUploadStickers();
-            console.info('Stickers were updated');
+            const date = new Date().toLocaleTimeString();
+            console.info(date, ' Stickers were updated');
         }, 1000 * 60 * 60);
     } catch (err) {
         console.error('Error in bot', err);
