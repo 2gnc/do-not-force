@@ -1,12 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as ppt from 'puppeteer';
 import Telegraf from 'telegraf';
 import { Fonts } from '../providers/google-fonts-provider';
 import { createScreenshot } from '../providers/screenshot-provider';
 import { generateFigure } from './generate-figure';
 import { generateHtmlPage } from './generate-html';
 import { stickers } from './stickers';
-import { fullSetName } from './constants';
+import { fullSetName, basicFontSize } from './constants';
 
 export async function botUploadStickers(): Promise<void> {
     try {
@@ -18,7 +19,26 @@ export async function botUploadStickers(): Promise<void> {
         for (const sticker of stickers) {
             const figure = await generateFigure();
             const font = fonts.randomFont;
-            await generateHtmlPage(sticker.text, `${i}.html`, figure, font);
+            let optimalFontSize = basicFontSize;
+            let isPictureBad = false;
+            do {
+                await generateHtmlPage(sticker.text, `${i}.html`, figure, font, optimalFontSize);
+                const assetsPath = path.join(__dirname, '../..', 'tmp');
+                const browser = await ppt.launch();
+                const page = await browser.newPage();
+                await page.goto(`file://${assetsPath}/${i}.html`, {
+                    waitUntil: 'domcontentloaded',
+                });
+                await page.waitFor(500);
+                const warning = await page.$$('div.warning');
+                if (warning.length) {
+                    isPictureBad = true;
+                    optimalFontSize -= 3;
+                } else {
+                    isPictureBad = false;
+                }
+                await browser.close();
+            } while (isPictureBad);
             await createScreenshot(`${i}.html`, `${i}.png`);
             const source = fs.readFileSync(path.join(__dirname, '../../tmp/screenshots', `${i}.png`));
             const { file_id } = await bot.telegram.uploadStickerFile(Number(process.env.MY_ID), {

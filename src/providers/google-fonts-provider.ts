@@ -34,7 +34,7 @@ export class Fonts {
     }
     get randomFont(): FontPrepared {
         const chance = new Chance();
-        const rNum = chance.integer({ min: 0, max: this._fonts.length });
+        const rNum = chance.integer({ min: 0, max: this._fonts.length - 1 });
         return this._fonts[rNum];
     }
 }

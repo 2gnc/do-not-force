@@ -2,12 +2,12 @@ import mapFigureToPath from '../helpers/map-figure-to-path';
 import * as Color from 'color';
 import { SceneParams } from '../@types/common';
 
-export async function generateCss(fontName: string, figure: SceneParams): Promise<string> {
+export async function generateCss(fontName: string, figure: SceneParams, fontSize: number): Promise<string> {
     const stroke = new Color(figure.textColor).negate();
     return `<style>
     body {
         font-family: "${fontName}";
-        font-size: 60px;
+        font-size: ${fontSize}px;
         text-transform: uppercase;
     }
     .box {

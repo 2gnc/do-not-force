@@ -1,6 +1,9 @@
 export const buildPath = './tmp';
 export const setName = 'DoNotForceDynamic';
 export const fullSetName = 'DoNotForceDynamic_by_do_not_force_bot';
+export const maxFontBoxWidth = 512;
+export const basicFontSize = 70;
+export const stickerUpdatePeriod = 3000;
 export const materialColorsList = [
     '#ffebee',
     '#ffcdd2',

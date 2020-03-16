@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { SceneParams, FontPrepared } from '../@types/common';
 import checkFileExist from '../helpers/check-file-exists';
-import { buildPath } from './constants';
+import { buildPath, maxFontBoxWidth } from './constants';
 import { generateCss } from './generate-css';
 
 export async function generateHtmlPage(
@@ -10,6 +10,7 @@ export async function generateHtmlPage(
     filename: string,
     figure: SceneParams,
     font: FontPrepared,
+    fontSize: number,
 ): Promise<void> {
     const pagePath = path.resolve(__dirname, buildPath, 'index.html');
     const page = checkFileExist(pagePath);
@@ -25,15 +26,27 @@ export async function generateHtmlPage(
             <html>
                 <head>
                 <link rel="stylesheet" href=${url}>
-                    ${await generateCss(name, figure)}
+                    ${await generateCss(name, figure, fontSize)}
                 </head>
                 <body>
                     <div class="box">
                         <div class="background-figure"></div>
                         <div class="foreground-figure"></div>
-                        <div class="text">${text}</div>
+                        <div class="text">
+                            <p>${text}</p>
+                        </div>
                     </div>
                 </body>
+                <script>
+                    window.onload = function () {
+                        const text = document.querySelector('p');
+                            console.log(window.getComputedStyle(text).width, text.scrollWidth, text.clientWidth);
+                            if (text.clientWidth > ${maxFontBoxWidth}) {
+                                const warning = '<div class="warning"></div>';
+                                text.insertAdjacentHTML('afterEnd', warning);
+                            }
+                    };
+                </script>
             </html>
         `;
         fs.writeFileSync(path.resolve(__dirname, '../..', buildPath, filename ? filename : 'index.html'), html);

@@ -11,7 +11,6 @@ bot()
             console.log(`Server is started on port ${PORT}`);
         });
     })
-    .then(() => require('./sticker-creator'))
     .catch((err) => {
         console.error(err);
     });

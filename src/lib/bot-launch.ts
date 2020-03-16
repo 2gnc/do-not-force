@@ -1,5 +1,5 @@
 import Telegraf from 'telegraf';
-import { fullSetName } from './constants';
+import { fullSetName, stickerUpdatePeriod } from './constants';
 import { botUploadStickers } from './bot-upload-stickers';
 import { botClearStickers } from './bot-clear-stickers';
 
@@ -11,10 +11,11 @@ export default async function(): Promise<void> {
         setInterval(async () => {
             const { stickers } = await bot.telegram.getStickerSet(fullSetName);
             await botClearStickers(stickers);
+            console.info(new Date().toLocaleTimeString(), ` START UPLOADING`);
             await botUploadStickers();
             const date = new Date().toLocaleTimeString();
             console.info(date, ' Stickers were updated');
-        }, 1000 * 60 * 60);
+        }, stickerUpdatePeriod * 60);
     } catch (err) {
         console.error('Error in bot', err);
     }
