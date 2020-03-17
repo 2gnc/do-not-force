@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "./node_modules/.bin/nodemon",
     "build": "",
-    "test": "DISABLE_LOGGING=1 jest"
+    "test": "DISABLE_LOGGING=1 jest",
+    "test:coverage": "npm run test -- --coverage"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { SceneParams, FontPrepared } from '../../@types/common';
-import checkFileExist from '../../helpers/check-file-exists';
 import { buildPath, maxFontBoxWidth } from '../constants';
 import { generateCss } from './generate-css';
 
@@ -12,14 +11,6 @@ export async function generateHtmlPage(
     font: FontPrepared,
     fontSize: number,
 ): Promise<void> {
-    const pagePath = path.resolve(__dirname, buildPath, 'index.html');
-    const page = checkFileExist(pagePath);
-
-    if (page) {
-        console.log('Deleting old file');
-        fs.unlinkSync(pagePath);
-    }
-
     const { name, url } = font;
     try {
         const html = `
