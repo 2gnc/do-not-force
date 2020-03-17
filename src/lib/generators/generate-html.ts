@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { SceneParams, FontPrepared } from '../@types/common';
-import checkFileExist from '../helpers/check-file-exists';
-import { buildPath, maxFontBoxWidth } from './constants';
+import { SceneParams, FontPrepared } from '../../@types/common';
+import checkFileExist from '../../helpers/check-file-exists';
+import { buildPath, maxFontBoxWidth } from '../constants';
 import { generateCss } from './generate-css';
 
 export async function generateHtmlPage(

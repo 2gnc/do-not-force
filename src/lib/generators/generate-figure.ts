@@ -1,8 +1,8 @@
 import * as Chance from 'chance';
-import { Figures, SceneParams, FigureCoorginates } from '../@types/common';
-import { getColorPalette } from '../providers/color-provider';
-import rPercent from '../helpers/get-random-percent';
-import { materialColorsList } from '../lib/constants';
+import { Figures, SceneParams, FigureCoorginates } from '../../@types/common';
+import { getColorPalette } from '../../providers/color-provider';
+import rPercent from '../../helpers/get-random-percent';
+import { materialColorsList } from '../constants';
 
 function getFigureCoordinates(figure: number): FigureCoorginates {
     const coordinates: FigureCoorginates = [];

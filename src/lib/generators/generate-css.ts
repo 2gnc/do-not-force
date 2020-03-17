@@ -1,6 +1,6 @@
-import mapFigureToPath from '../helpers/map-figure-to-path';
+import mapFigureToPath from '../../helpers/map-figure-to-path';
 import * as Color from 'color';
-import { SceneParams } from '../@types/common';
+import { SceneParams } from '../../@types/common';
 
 export async function generateCss(fontName: string, figure: SceneParams, fontSize: number): Promise<string> {
     const stroke = new Color(figure.textColor).negate();

@@ -1,5 +1,5 @@
 import Telegraf from 'telegraf';
-import { fullSetName, stickerUpdatePeriod } from './constants';
+import { fullSetName, stickerUpdatePeriod } from '../constants';
 import { botUploadStickers } from './bot-upload-stickers';
 import { botClearStickers } from './bot-clear-stickers';
 

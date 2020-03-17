@@ -1,5 +1,5 @@
 import * as Chance from 'chance';
-import { doRequest } from '../lib/do-request';
+import { doRequest } from '../helpers/do-request';
 
 export async function getColorPalette(color?: string): Promise<Record<string, string>> {
     const isColorCorrect = /^#[a-z0-9]{6}$/.test(color);

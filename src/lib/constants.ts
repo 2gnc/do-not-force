@@ -3,7 +3,7 @@ export const setName = 'DoNotForceDynamic';
 export const fullSetName = 'DoNotForceDynamic_by_do_not_force_bot';
 export const maxFontBoxWidth = 512;
 export const basicFontSize = 70;
-export const stickerUpdatePeriod = 3000;
+export const stickerUpdatePeriod = 3000 * 60;
 export const materialColorsList = [
     '#ffebee',
     '#ffcdd2',
@@ -261,4 +261,3 @@ export const materialColorsList = [
     '#263238',
 ];
 export const colorsStopList: string[] = [];
-export const fontsStopList: string[] = [];

@@ -2,12 +2,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ppt from 'puppeteer';
 import Telegraf from 'telegraf';
-import { Fonts } from '../providers/google-fonts-provider';
-import { createScreenshot } from '../providers/screenshot-provider';
-import { generateFigure } from './generate-figure';
-import { generateHtmlPage } from './generate-html';
-import { stickers } from './stickers';
-import { fullSetName, basicFontSize } from './constants';
+import { Fonts } from '../../providers/google-fonts-provider';
+import { createScreenshot } from '../../providers/screenshot-provider';
+import { generateFigure } from '../generators/generate-figure';
+import { generateHtmlPage } from '../generators/generate-html';
+import { stickers } from '../stickers';
+import { fullSetName, basicFontSize } from '../constants';
 
 export async function botUploadStickers(): Promise<void> {
     try {
@@ -21,8 +21,13 @@ export async function botUploadStickers(): Promise<void> {
             const font = fonts.randomFont;
             let optimalFontSize = basicFontSize;
             let isPictureBad = false;
+            let text = sticker.text;
+            if (sticker.emojis === 'ℹ') {
+                text += new Date().toLocaleTimeString();
+                optimalFontSize = 30;
+            }
             do {
-                await generateHtmlPage(sticker.text, `${i}.html`, figure, font, optimalFontSize);
+                await generateHtmlPage(text, `${i}.html`, figure, font, optimalFontSize);
                 const assetsPath = path.join(__dirname, '../..', 'tmp');
                 const browser = await ppt.launch();
                 const page = await browser.newPage();

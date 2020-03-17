@@ -1,6 +1,6 @@
 import * as Chance from 'chance';
 import { FontPrepared, FontRaw } from '../@types/common';
-import { doRequest } from '../lib/do-request';
+import { doRequest } from '../helpers/do-request';
 
 export class Fonts {
     private _fontURLBase = 'https://fonts.googleapis.com/css?family=';
