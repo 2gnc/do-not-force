@@ -4,7 +4,7 @@ import { getColorPalette } from '../../providers/color-provider';
 import rPercent from '../../helpers/get-random-percent';
 import { materialColorsList } from '../constants';
 
-function getFigureCoordinates(figure: number): FigureCoorginates {
+export function getFigureCoordinates(figure: number): FigureCoorginates {
     const coordinates: FigureCoorginates = [];
     switch (figure) {
         case Figures.CIRCLE:

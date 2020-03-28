@@ -22,7 +22,6 @@ function getErrorBody(error: any): string {
     if (error.response && error.response.body) {
         return ` (message: ${JSON.stringify(error.response.body)}))`;
     }
-
     return '';
 }
 

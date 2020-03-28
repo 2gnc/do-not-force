@@ -2,6 +2,8 @@ jest.mock('got');
 import got from 'got';
 import { doRequest } from '../../helpers/do-request';
 
+const mockedGot = got as unknown;
+
 beforeEach(() => {
     jest.spyOn(global.console, 'info');
 });
@@ -11,7 +13,7 @@ afterEach(() => {
 
 describe('do-request ', () => {
     it(' calls got once', async () => {
-        got.mockReturnValue(Promise.resolve('test'));
+        (mockedGot as jest.Mock).mockReturnValue(Promise.resolve('test'));
         await doRequest('https://test.ru', {
             gotOptions: {},
             origin: 'test',
@@ -20,7 +22,7 @@ describe('do-request ', () => {
         expect(global.console.info).toHaveBeenCalledTimes(1);
     });
     it(' returns returns value of async request', async () => {
-        got.mockReturnValue(Promise.resolve('test'));
+        (mockedGot as jest.Mock).mockReturnValue(Promise.resolve('test'));
         const response = await doRequest('https://test.ru', {
             gotOptions: {},
             origin: 'test',
@@ -28,7 +30,7 @@ describe('do-request ', () => {
         expect(response).toBe('test');
     });
     it(' runs console.info', async () => {
-        got.mockReturnValue(Promise.resolve('test'));
+        (mockedGot as jest.Mock).mockReturnValue(Promise.resolve('test'));
         await doRequest('https://test.ru', {
             gotOptions: {},
             origin: 'test',
@@ -38,7 +40,7 @@ describe('do-request ', () => {
     });
     it(' logs error message in case of error', async () => {
         jest.spyOn(global.console, 'error');
-        got.mockImplementation(() => {
+        (mockedGot as jest.Mock).mockImplementation(() => {
             throw 'error';
         });
         async function testing(): Promise<void> {
