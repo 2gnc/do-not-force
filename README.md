@@ -9,4 +9,4 @@ BOT_API_KEY=<your bot key>
 BOT_NAME=do_not_force_bot
 ``` 
 
-`npm run dev` - starts developping
+`npm run dev` - starts local server 

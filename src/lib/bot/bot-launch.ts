@@ -15,7 +15,7 @@ export default async function(): Promise<void> {
             await botUploadStickers();
             const date = new Date().toLocaleTimeString();
             console.info(date, ' Stickers were updated');
-        }, stickerUpdatePeriod * 60);
+        }, stickerUpdatePeriod);
     } catch (err) {
         console.error('Error in bot', err);
     }

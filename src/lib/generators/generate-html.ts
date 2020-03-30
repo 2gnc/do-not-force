@@ -40,7 +40,7 @@ export async function generateHtmlPage(
                 </script>
             </html>
         `;
-        fs.writeFileSync(path.resolve(__dirname, '../..', buildPath, filename ? filename : 'index.html'), html);
+        fs.writeFileSync(path.resolve(__dirname, '../../..', buildPath, filename ? filename : 'index.html'), html);
     } catch (err) {
         console.error('Error while create HTML', err);
     }

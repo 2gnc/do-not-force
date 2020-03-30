@@ -24,11 +24,13 @@ export async function botUploadStickers(): Promise<void> {
             let text = sticker.text;
             if (sticker.emojis === 'ℹ') {
                 text += new Date().toLocaleTimeString();
+                text += ', ';
+                text += new Date().toLocaleDateString();
                 optimalFontSize = 30;
             }
             do {
                 await generateHtmlPage(text, `${i}.html`, figure, font, optimalFontSize);
-                const assetsPath = path.join(__dirname, '../..', 'tmp');
+                const assetsPath = path.join(__dirname, '../../../tmp');
                 const browser = await ppt.launch();
                 const page = await browser.newPage();
                 await page.goto(`file://${assetsPath}/${i}.html`, {
@@ -45,7 +47,7 @@ export async function botUploadStickers(): Promise<void> {
                 await browser.close();
             } while (isPictureBad);
             await createScreenshot(`${i}.html`, `${i}.png`);
-            const source = fs.readFileSync(path.join(__dirname, '../../tmp/screenshots', `${i}.png`));
+            const source = fs.readFileSync(path.join(__dirname, '../../../tmp/screenshots', `${i}.png`));
             const { file_id } = await bot.telegram.uploadStickerFile(Number(process.env.MY_ID), {
                 source,
             });
